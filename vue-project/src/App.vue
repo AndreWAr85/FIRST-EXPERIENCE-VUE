@@ -27,7 +27,7 @@
   </div>
   </div>-->
   <div class="app">
-    <post-form />
+    <post-form @create="createPost" />
     <post-list :posts="posts" />
   </div>
 </template>
@@ -54,8 +54,6 @@ export default {
         { id: 3, title: "Javascript 3", body: "Opis komentarza 3" },
         { id: 4, title: "Javascript 4", body: "Opis komentarza 4" },
       ],
-      title: "",
-      body: "",
     };
   },
   methods: {
@@ -65,15 +63,8 @@ export default {
     addDislikes() {
       this.dislikes += 1;
     },*/
-    createPost() {
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        body: this.body,
-      };
-      this.posts.push(newPost);
-      this.title = "";
-      this.body = "";
+    createPost(post) {
+      this.posts.push(post);
     },
   },
 };

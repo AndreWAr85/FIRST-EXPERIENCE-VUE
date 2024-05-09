@@ -1,23 +1,9 @@
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent="createPost">
     <h4>Tworzenie komentarzy</h4>
-
-    <input
-      v-bind:vaue="poat.title"
-      @input="poast.title = $event.target.value"
-      class="input"
-      type="text"
-      placeholder="Nazwa"
-    />
-
-    <input
-      v-bind:vaue="post.body"
-      @input="poast.body = $event.target.value"
-      class="input"
-      type="text"
-      placeholder="Opis postu"
-    />
-    <button class="btn" @click="createPost">Stwórz</button>
+    <input v-model="post.title" class="input" type="text" placeholder="Nazwa" />
+    <input v-model="post.body" class="input" type="text" placeholder="Opis" />
+    <button class="btn">Stwórz</button>
   </form>
 </template>
 
@@ -31,8 +17,19 @@ export default {
       },
     };
   },
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit("create", this.post);
+      this.post = {
+        title: "",
+        body: "",
+      };
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 form {
